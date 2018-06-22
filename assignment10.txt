@@ -1,0 +1,39 @@
+QUES:
+ANS:
+
+
+package acadview;
+import java.lang.reflect.Field;
+import java.util.*;
+ class DynamicArray2 
+    
+{
+    ArrayList arraylist;
+    int size;
+    public DynamicArray2 (int size) throws Exception
+    {
+        this.size=size;
+        arraylist=new ArrayList(4);
+         System.out.println(getCapacity (arraylist));
+        arraylist.add(1);
+        arraylist.ensureCapacity(size*2);
+        System.out.println(getCapacity (arraylist));
+    }
+    static int getCapacity(ArrayList a1) throws Exception
+    {
+      Field field= ArrayList.class.getDeclaredField("elementData");
+      field.setAccessible(true);
+      int capacity= ((Object[])field.get(a1)).length;
+      return capacity;
+    }
+     
+ }
+
+class DriverClass2
+{
+     public static void main(String args[]) throws Exception
+     {
+         DynamicArray2 obj= new  DynamicArray2(4);
+     }
+}
+
